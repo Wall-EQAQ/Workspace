@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 此次配置的status如果trace级别，则log4j2会输出log4j自身的执行日志 -->
+<Configuration status="info">
+<Properties> <!-- 支持属性占位符-->
+    <Property name="fileName">target/rolling.log</Property>
+</Properties>
+<Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+        <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+    </Console>
+    <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${fileName}"
+                             filePattern="target/rolling-%d{MM-dd-yyyy}-%i.log.gz">
+        <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+        <Policies>
+            <SizeBasedTriggeringPolicy size="500 MB"/>
+            <TimeBasedTriggeringPolicy/>
+        </Policies>
+    </RollingRandomAccessFile>
+    <Async name="Async">
+        <AppenderRef ref="Console"/>
+        <AppenderRef ref="RollingRandomAccessFile"/>
+    </Async>
+</Appenders>
+<Loggers>
+    <Logger name="RollingRandomAccessFileLogger" level="info">
+        <AppenderRef ref="RollingRandomAccessFile"/>
+    </Logger>
+    <Logger name="AsyncLogger" level="info" additivity="false">
+        <AppenderRef ref="Async"/>
+    </Logger>
+    <Root level="debug">
+        <AppenderRef ref="Console"/>
+    </Root>
+</Loggers>
+</Configuration>

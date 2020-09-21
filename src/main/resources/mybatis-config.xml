@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--typeAliases:(别名)主要用来代替映射文件xxxMapper.xml中的resultType(即查询结果的返回值类型)-->
+    <typeAliases>
+        <!--扫描此包以及子包中所有的类,为所有类批量起别名(默认类名小写)-->
+        <package name="com.dxd.crud.bean"/>
+    </typeAliases>
+    <!--<settings>-->
+        <!--&lt;!&ndash;开启懒加载和按需加载&ndash;&gt;-->
+        <!--<setting name="lazyLoadingEnabled" value="true"/>-->
+        <!--<setting name="aggressiveLazyLoading" value="false"></setting>-->
+    <!--</settings>-->
+
+    <!--DB_VENDOR作用就是得到数据库厂商的标识(驱动getDatabaseProdutcName())，mybatis就能根据数据库厂商标识来执行不同的sql
+        配置完之后在xxxMapper.xml中的select或者其他标签中设置  databaseId  就可以了
+    -->
+    <!--<databaseIdProvider type="DB_VENDOR">-->
+        <!--&lt;!&ndash;为不同的数据库厂商起别名&ndash;&gt;-->
+        <!--<property name="MySQL" value="mysql"></property>-->
+        <!--<property name="Oracle" value="oracle"></property>-->
+        <!--<property name="SQL Server" value="sqlserver"></property>-->
+    <!--</databaseIdProvider>-->
+    <!--mybatis的分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--reasonable：分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页，
+            pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询-->
+            <property name="pageSizeZero" value="true"/>
+            <property name="reasonable" value="true"></property>
+        </plugin>
+    </plugins>
+
+</configuration>
