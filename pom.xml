@@ -79,7 +79,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>5.1.4.RELEASE</version>
+      <version>6.0.0</version>
     </dependency>
     <!--Spring需要的依赖到此结束-->
     <dependency>
